@@ -1,14 +1,11 @@
 ﻿#region License
+
 // Copyright (c) 2005-2012, CellAO Team
-// 
 // All rights reserved.
-// 
 // Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
-// 
 //     * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
 //     * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
 //     * Neither the name of the CellAO Team nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
-// 
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 // "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 // LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -22,13 +19,10 @@
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
 
-#region Usings...
-using Config = AO.Core.Config.ConfigReadWrite;
-
-#endregion
-
 namespace ChatEngine
 {
+    #region Usings ...
+
     using System;
     using System.Diagnostics;
     using System.Net;
@@ -39,39 +33,22 @@ namespace ChatEngine
     using Cell.Core;
 
     using NBug;
+    using NBug.Properties;
 
     using NLog;
     using NLog.Config;
     using NLog.Targets;
+
+    using Config = AO.Core.Config.ConfigReadWrite;
+
+    #endregion
 
     /// <summary>
     /// The program.
     /// </summary>
     public static class Program
     {
-        /// <summary>
-        /// The is modified.
-        /// </summary>
-        /// <returns>
-        /// Returns true if code is modified against the SVN revision
-        /// </returns>
-        public static bool IsModified()
-        {
-            string[] info = AssemblyInfoclass.Trademark.Split(';');
-            return info[1] == "1";
-        }
-
-        /// <summary>
-        /// The is mixed.
-        /// </summary>
-        /// <returns>
-        /// Returns true if code is mixed against the SVN revision
-        /// </returns>
-        public static bool IsMixed()
-        {
-            string[] info = AssemblyInfoclass.Trademark.Split(';');
-            return info[0] == "1";
-        }
+        #region Methods
 
         /// <summary>
         /// The main.
@@ -82,18 +59,11 @@ namespace ChatEngine
         private static void Main(string[] args)
         {
             Console.Title = "CellAO " + AssemblyInfoclass.Title + " Console. Version: " + AssemblyInfoclass.Description
-                            + " " + AssemblyInfoclass.AssemblyVersion;
+                            + " " + AssemblyInfoclass.AssemblyVersion + " " + AssemblyInfoclass.Trademark;
+
             ConsoleText ct = new ConsoleText();
             ct.TextRead("main.txt");
             Console.WriteLine("Loading " + AssemblyInfoclass.Title + "...");
-            if (IsModified())
-            {
-                Console.WriteLine("Your " + AssemblyInfoclass.Title + " was compiled from modified source code.");
-            }
-            else if (IsMixed())
-            {
-                Console.WriteLine("Your " + AssemblyInfoclass.Title + " uses mixed SVN revisions.");
-            }
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Using ISComm v1.0");
@@ -105,6 +75,7 @@ namespace ChatEngine
 
             Console.WriteLine("[ISComm] Waiting for link...");
 
+            #region NLog
             LoggingConfiguration config = new LoggingConfiguration();
             ColoredConsoleTarget consoleTarget = new ColoredConsoleTarget();
             consoleTarget.Layout = "${date:format=HH\\:MM\\:ss} ${logger} ${message}";
@@ -117,6 +88,17 @@ namespace ChatEngine
             LoggingRule rule2 = new LoggingRule("*", LogLevel.Trace, fileTarget);
             config.LoggingRules.Add(rule2);
             LogManager.Configuration = config;
+            #endregion
+
+            #region NBug
+
+            SettingsOverride.LoadCustomSettings("NBug.ChatEngine.Config");
+            Settings.WriteLogToDisk = true;
+            AppDomain.CurrentDomain.UnhandledException += Handler.UnhandledException;
+            TaskScheduler.UnobservedTaskException += Handler.UnobservedTaskException;
+
+            // TODO: ADD More Handlers.
+            #endregion
 
             IPAddress localISComm;
 
@@ -167,14 +149,11 @@ namespace ChatEngine
             chatServer.TcpPort = Convert.ToInt32(Config.Instance.CurrentConfig.ChatPort);
             chatServer.MaximumPendingConnections = 100;
 
-            #region NBug
             AppDomain.CurrentDomain.UnhandledException += Handler.UnhandledException;
             TaskScheduler.UnobservedTaskException += Handler.UnobservedTaskException;
 
             // TODO: ADD More Handlers.
-            #endregion
 
-            #region Console Commands
             // Andyzweb: I added checks for if the server is running or not
             // also a command called running that returns the status of the server
             // and added the Console.Write("\nServer Command >>"); to chatserver
@@ -242,7 +221,8 @@ namespace ChatEngine
                         break;
                 }
             }
-            #endregion
         }
+
+        #endregion
     }
 }

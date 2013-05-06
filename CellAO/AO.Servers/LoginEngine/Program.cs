@@ -42,6 +42,7 @@ namespace LoginEngine
     using MySql.Data.MySqlClient;
 
     using NBug;
+    using NBug.Properties;
 
     using NLog;
     using NLog.Config;
@@ -50,18 +51,6 @@ namespace LoginEngine
     public static class Program
     {
         private static LoginServer loginLoginServer;
-
-        public static bool Ismodified()
-        {
-            string[] info = AssemblyInfoclass.Trademark.Split(';');
-            return (info[1] == "1");
-        }
-
-        public static bool Ismixed()
-        {
-            string[] info = AssemblyInfoclass.Trademark.Split(';');
-            return (info[0] == "1");
-        }
 
         public static bool TestEmailRegex(string emailAddress)
         {
@@ -78,18 +67,11 @@ namespace LoginEngine
         {
             #region Console Texts...
             Console.Title = "CellAO " + AssemblyInfoclass.Title + " Console. Version: " + AssemblyInfoclass.Description
-                            + " " + AssemblyInfoclass.AssemblyVersion;
+                + " " + AssemblyInfoclass.AssemblyVersion + " " + AssemblyInfoclass.Trademark;
+
             ConsoleText ct = new ConsoleText();
             ct.TextRead("main.txt");
             Console.WriteLine("Loading " + AssemblyInfoclass.Title + "...");
-            if (Ismodified())
-            {
-                Console.WriteLine("Your " + AssemblyInfoclass.Title + " was compiled from modified source code.");
-            }
-            else if (Ismixed())
-            {
-                Console.WriteLine("Your " + AssemblyInfoclass.Title + " uses mixed SVN revisions.");
-            }
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("[OK]");
@@ -129,6 +111,8 @@ namespace LoginEngine
             #endregion
 
             #region NBug
+            SettingsOverride.LoadCustomSettings("NBug.LoginEngine.Config");
+            NBug.Settings.WriteLogToDisk = true;
             AppDomain.CurrentDomain.UnhandledException += Handler.UnhandledException;
             TaskScheduler.UnobservedTaskException += Handler.UnobservedTaskException;
             //TODO: ADD More Handlers.
