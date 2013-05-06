@@ -56,8 +56,6 @@ namespace ZoneEngine
 
     public class Program
     {
-        public static ScriptAPI Script;
-
         public static Server zoneServer;
 
         public static ScriptCompiler csc;
@@ -77,18 +75,11 @@ namespace ZoneEngine
 
             #region Console Text...
             Console.Title = "CellAO " + AssemblyInfoclass.Title + " Console. Version: " + AssemblyInfoclass.Description
-                            + " " + AssemblyInfoclass.AssemblyVersion;
+                + " " + AssemblyInfoclass.AssemblyVersion + " " + AssemblyInfoclass.Trademark;
+
             ConsoleText ct = new ConsoleText();
             ct.TextRead("main.txt");
             Console.WriteLine("Loading " + AssemblyInfoclass.Title + "...");
-            if (ismodified())
-            {
-                Console.WriteLine("Your " + AssemblyInfoclass.Title + " was compiled from modified source code.");
-            }
-            else if (ismixed())
-            {
-                Console.WriteLine("Your " + AssemblyInfoclass.Title + " uses mixed SVN revisions.");
-            }
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Using ISComm v1.0");
@@ -154,7 +145,8 @@ namespace ZoneEngine
             #endregion
 
             #region NBug
-            SettingsOverride.LoadCustomSettings("NBug.Config");
+            SettingsOverride.LoadCustomSettings("NBug.ZoneEngine.Config");
+            NBug.Settings.WriteLogToDisk = true;
             AppDomain.CurrentDomain.UnhandledException += Handler.UnhandledException;
             TaskScheduler.UnobservedTaskException += Handler.UnobservedTaskException;
             //TODO: ADD More Handlers.
