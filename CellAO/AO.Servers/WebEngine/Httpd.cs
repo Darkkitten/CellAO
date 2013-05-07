@@ -9,33 +9,34 @@ using System.Net.WebSockets;
 
 namespace WebEngine
 {
-    public class Httpd
-    {
-        private HttpListener requestListener { get; set; }
-        private IPAddress Address { get; set; }
-        private int Port { get; set; }
 
-        public void Start(string Host, int port)
+    public static class Httpd
+    {
+        private static HttpListener requestListener { get; set; }
+        private static IPAddress Address { get; set; }
+        private static int Port { get; set; }
+
+        public static void Start(string Host, int port)
         {
-            this.Address = IPAddress.Parse(Host);
-            this.Port = port;
+            Address = IPAddress.Parse(Host);
+            Port = port;
             try
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Server Starting...");
                 Console.ResetColor();
                 
-                this.requestListener = new HttpListener();
-                this.requestListener.Prefixes.Add(string.Format("http://*:{0}/", port));
-                this.requestListener.Start();
-                this.requestListener.BeginGetContext(new AsyncCallback(this.RequestReceived), this.requestListener);
+                requestListener = new HttpListener();
+                requestListener.Prefixes.Add(string.Format("http://*:{0}/", port));
+                requestListener.Start();
+               requestListener.BeginGetContext(new AsyncCallback(RequestReceived), requestListener);
             }
             catch { Console.ForegroundColor = ConsoleColor.Red; Console.WriteLine("Unable to start Server..."); Console.ResetColor(); }
         }
 
-        public void Stop()
+        public static void Stop()
         {
-            this.requestListener.Stop();
+            requestListener.Stop();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Server Stopped.");
             Console.ResetColor();
@@ -45,7 +46,7 @@ namespace WebEngine
         /// Called when an HTTP request is received.
         /// </summary>
         /// <param name="result">Information about the Async Call</param>
-        public void RequestReceived(IAsyncResult result)
+        public static void RequestReceived(IAsyncResult result)
         {
             // Retrieve the object that called the Asynch Operation
             HttpListener baseListener = (HttpListener)result.AsyncState;
@@ -61,7 +62,7 @@ namespace WebEngine
                 Console.WriteLine(e.Message);
                 if (requestListener.IsListening)
                 {
-                    this.requestListener.BeginGetContext(new AsyncCallback(this.RequestReceived), this.requestListener);
+                    requestListener.BeginGetContext(new AsyncCallback(RequestReceived), requestListener);
                 }
                 return;
             }
@@ -69,7 +70,7 @@ namespace WebEngine
             //ConversationManager csm = new ConversationManager(context);
 
             // Now let the server start the next request
-            this.requestListener.BeginGetContext(new AsyncCallback(this.RequestReceived), this.requestListener);
+            requestListener.BeginGetContext(new AsyncCallback(RequestReceived), requestListener);
         }
 
     }

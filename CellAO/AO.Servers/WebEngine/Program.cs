@@ -73,7 +73,7 @@ namespace WebEngine
             //Code goes here to execute the Class for PHP Check and download / Install etc.
             #endregion
 
-            Httpd _httpd = new Httpd();
+           // Httpd _httpd = new Httpd();
 
             bool processedargs = false;
 
@@ -148,10 +148,10 @@ namespace WebEngine
                 switch (consoleCommand.ToLower())
                 {
                     case "start":
-                        _httpd.Start(_config.ConfigReadWrite.Instance.CurrentConfig.WebHost, _config.ConfigReadWrite.Instance.CurrentConfig.WebPort);
+                        Httpd.Start(_config.ConfigReadWrite.Instance.CurrentConfig.WebHost, _config.ConfigReadWrite.Instance.CurrentConfig.WebPort);
                         break;
                     case "stop":
-                        _httpd.Stop();
+                        Httpd.Stop();
                         break;
                     case "exit":
                         Process.GetCurrentProcess().Kill();

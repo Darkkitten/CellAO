@@ -14,7 +14,7 @@ namespace WebEngine
         /// This is our Php Pharser
         /// </summary>
         /// <param name="phpExeLoc">Location of Php</param>
-        /// <param name="fileToParseLoc">Php File to Parse</param>
+        /// <param name="fileToParseLoc">Php File to Parse htdocs default.</param>
         /// <param name="parsedFile"> File to save Parsed document to.</param>
         public static void ParsePhpFile(string phpExeLoc, string fileToParseLoc, out string parsedFile)
         {
