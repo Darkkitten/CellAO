@@ -41,11 +41,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyInfoclass.cs" />
+    <Compile Include="PhpCheck.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Data\Default.dat" />
+    <None Include="Data\Mimes.dat" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Source\AO.Core\AO.Core.csproj">
+      <Project>{0b1cca26-dd9c-400a-9ef0-1d9423905f4d}</Project>
+      <Name>AO.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\VDir.dat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="htdocs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

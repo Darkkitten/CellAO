@@ -95,127 +95,6 @@ namespace AO.Core.Config
         /// This is the Sql Connection String
         /// </summary>
         connectionString,
-        // This is for Grid Skill Checks
-        /// <summary>
-        /// Comp. Lit. Check to access the West Athen Grid
-        /// </summary>
-        WestAthen,
-
-        /// <summary>
-        /// Comp. Lit. check to access the Old Athen Grid
-        /// </summary>
-        OldAthen,
-
-        /// <summary>
-        /// Comp. Lit. check to access the Tir Grid
-        /// </summary>
-        Tir_Inside,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Tir_Outside,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Borealis,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Meetmedeere,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Newland,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Omni_One_Trade,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Rome_Red,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Omni_One_Entertainment_North,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Omni_One_Entertainment_South,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Lush_Hills,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Clondyke,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Galway_County,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Broken_Shores,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        four_holes,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        twoho,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Harrys,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Omni_One_HQ,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Camelot,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Sentinels,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Teleport_Tower_noob_right,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Teleport_Tower_noob_middle,
-
-        /// <summary>
-        /// 
-        /// </summary>
-        Teleport_Tower_noob_left,
-
         /// <summary>
         /// 
         /// </summary>
@@ -230,6 +109,18 @@ namespace AO.Core.Config
         /// Locale language selection for you, en = english , gr = german, more languages as we go
         /// </summary>
         Locale,
+        /// <summary>
+        /// Hostname for Webserver
+        /// </summary>
+        WebHost,
+        /// <summary>
+        /// Port for Webserver
+        /// </summary>
+        WebPort,
+        /// <summary>
+        /// Path to your PHP
+        /// </summary>
+        PhpPath,
     }
     #endregion
 
@@ -308,112 +199,18 @@ namespace AO.Core.Config
         /// Gets or Sets the UsePassword
         /// </summary>
         public bool UsePassword { get; set; }
-
-        //Grid use checks
-        /// <summary>
-        /// Gets or Sets the West Athen Comp. Lit. Check Number
-        /// </summary>
-        public int WestAthen { get; set; }
-
-        /// <summary>
-        /// Gets or Sets the Old Athen Comp. Lit. Check Number
-        /// </summary>
-        public int OldAthen { get; set; }
-
-        /// <summary>
-        /// Gets or Sets the Tir Inside Comp. Lit. Check Number
-        /// </summary>
-        public int Tir_Inside { get; set; }
-
         /// <summary>
         /// 
         /// </summary>
-        public int Tir_Outside { get; set; }
-
+        public string WebHost { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int Borealis { get; set; }
-
+        public int WebPort { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public int Meetmedeere { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int Newland { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int Omni_One_Trade { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int Rome_Red { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int Omni_One_Entertainment_North { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int Omni_One_Entertainment_South { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int Lush_Hills { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int Clondyke { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int Galway_County { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int Broken_Shores { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int four_holes { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int twoho { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int Harrys { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int Omni_One_HQ { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int Camelot { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int Sentinels { get; set; }
+        public string PhpPath { get; set; }
 
         /// <summary>
         /// Local ISComm IP address

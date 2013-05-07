@@ -624,6 +624,7 @@
     </Content>
     <Content Include="Config.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="SQLTables\charactersuploadednanos.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
