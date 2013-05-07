@@ -63,8 +63,11 @@ namespace WebEngine
             #endregion
 
             #region Php.exe Check..?
+            PhpCheck phpc = new PhpCheck();
             //Code goes here to execute the Class for PHP Check and download / Install etc.
             #endregion
+
+            Httpd _httpd = new Httpd();
 
             bool processedargs = false;
 
@@ -115,12 +118,23 @@ namespace WebEngine
                 switch (consoleCommand.ToLower())
                 {
                     case "start":
+                        _httpd.Start(_config.ConfigReadWrite.Instance.CurrentConfig.WebHost, _config.ConfigReadWrite.Instance.CurrentConfig.WebPort);
                         break;
                     case "stop":
+                        _httpd.Stop();
                         break;
                     case "exit":
+                        Process.GetCurrentProcess().Kill();
                         break;
                     default:
+                        if (_config.ConfigReadWrite.Instance.CurrentConfig.Locale == "en")
+                            ct.TextRead("en_web_consolecmddefault.txt");
+                        else if (_config.ConfigReadWrite.Instance.CurrentConfig.Locale == "ro")
+                            ct.TextRead("ro_web_consolecmddefault.txt");
+                        else if (_config.ConfigReadWrite.Instance.CurrentConfig.Locale == "gr")
+                            ct.TextRead("gr_web_consolecmddefault.txt");
+                        else if (_config.ConfigReadWrite.Instance.CurrentConfig.Locale == "ee")
+                            ct.TextRead("ee_web_consolecmddefault.txt");
                         break;
                 }
             }
