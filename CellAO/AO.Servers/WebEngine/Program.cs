@@ -29,11 +29,17 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
-using System.IO;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
+using NBug;
+using NBug.Properties;
+
+using NLog;
+using NLog.Config;
+using NLog.Targets;
 
 using AO.Core;
 using _config = AO.Core.Config;
@@ -71,6 +77,30 @@ namespace WebEngine
 
             bool processedargs = false;
 
+            #region NLog
+            LoggingConfiguration config = new LoggingConfiguration();
+            ColoredConsoleTarget consoleTarget = new ColoredConsoleTarget();
+            consoleTarget.Layout = "${date:format=HH\\:MM\\:ss} ${logger} ${message}";
+            FileTarget fileTarget = new FileTarget();
+            config.AddTarget("file", fileTarget);
+            fileTarget.FileName = "${basedir}/WebEngineLog.txt";
+            fileTarget.Layout = "${date:format=HH\\:MM\\:ss} ${logger} ${message}";
+            LoggingRule rule1 = new LoggingRule("*", LogLevel.Trace, consoleTarget);
+            config.LoggingRules.Add(rule1);
+            LoggingRule rule2 = new LoggingRule("*", LogLevel.Trace, fileTarget);
+            config.LoggingRules.Add(rule2);
+            LogManager.Configuration = config;
+            #endregion
+
+            #region NBug
+            SettingsOverride.LoadCustomSettings("NBug.WebEngine.Config");
+            NBug.Settings.WriteLogToDisk = true;
+            AppDomain.CurrentDomain.UnhandledException += Handler.UnhandledException;
+            TaskScheduler.UnobservedTaskException += Handler.UnobservedTaskException;
+            //TODO: ADD More Handlers.
+            #endregion
+
+            #region Console Commands
             string consoleCommand;
             #region Locale
             if (_config.ConfigReadWrite.Instance.CurrentConfig.Locale == "en")
@@ -137,6 +167,7 @@ namespace WebEngine
                             ct.TextRead("ee_web_consolecmddefault.txt");
                         break;
                 }
+            #endregion
             }
         }
     }
