@@ -67,7 +67,7 @@ namespace WebEngine
                 return;
             }
             // Send the context to our manager
-            //ConversationManager csm = new ConversationManager(context);
+            ConverstationManager csm = new ConverstationManager(context);
 
             // Now let the server start the next request
             requestListener.BeginGetContext(new AsyncCallback(RequestReceived), requestListener);
