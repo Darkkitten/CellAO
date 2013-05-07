@@ -73,8 +73,6 @@ namespace WebEngine
             //Code goes here to execute the Class for PHP Check and download / Install etc.
             #endregion
 
-           // Httpd _httpd = new Httpd();
-
             bool processedargs = false;
 
             #region NLog
@@ -129,8 +127,7 @@ namespace WebEngine
                         if (args[0].ToLower() == "/autostart")
                         {
                             ct.TextRead("autostart.txt");
-                           // ThreadMgr.Start();
-                            //loginLoginServer.Start();
+                            Httpd.Start(_config.ConfigReadWrite.Instance.CurrentConfig.WebHost, _config.ConfigReadWrite.Instance.CurrentConfig.WebPort);
                         }
                     }
                     processedargs = true;
