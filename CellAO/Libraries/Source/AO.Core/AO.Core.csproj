@@ -264,7 +264,9 @@
     <Content Include="locale\en\en_main.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="locale\en\en_web_consolecmdsdefault.txt" />
+    <Content Include="locale\en\en_web_consolecmdsdefault.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="locale\en\en_zone_consolecmdsdefault.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -280,7 +282,9 @@
     <Content Include="locale\en\en_loginisrunning.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="locale\en\en_web_consolecommands.txt" />
+    <Content Include="locale\en\en_web_consolecommands.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="locale\gr\gr_helpstart.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

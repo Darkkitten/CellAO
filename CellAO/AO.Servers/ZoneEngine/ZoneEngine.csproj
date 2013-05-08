@@ -344,9 +344,6 @@
     <Compile Include="Packets\VendingMachineFullUpdate.cs" />
     <Compile Include="Pet.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <Generator>..\..\..\Helpers\RevisionGetter\bin\RevisionGetter.exe</Generator>
-    </Compile>
     <Content Include="Scripts\customnpc\GenericNPC.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -383,6 +380,7 @@
     <Compile Include="ChatCommands\Teleport.cs" />
     <Compile Include="ChatCommands\TeleportDynel.cs" />
     <Compile Include="ChatCommands\TeleportToNpc.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Script\AOChatCommand.cs" />
     <Compile Include="Script\IAOScript.cs" />
     <Compile Include="Script\ScriptCompiler.cs" />
@@ -2548,7 +2546,8 @@
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>"$(SolutionDir)Helpers\RevisionGetter\bin\RevisionGetter.exe" "$(ProjectDir)\Properties\AssemblyInfo.cs"</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>

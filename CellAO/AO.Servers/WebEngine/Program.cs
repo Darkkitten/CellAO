@@ -70,6 +70,7 @@ namespace WebEngine
 
             #region Php.exe Check..?
             PhpCheck phpc = new PhpCheck();
+            phpc.Check();
             //Code goes here to execute the Class for PHP Check and download / Install etc.
             #endregion
 
@@ -158,13 +159,13 @@ namespace WebEngine
                         break;
                     default:
                         if (_config.ConfigReadWrite.Instance.CurrentConfig.Locale == "en")
-                            ct.TextRead("en_web_consolecmddefault.txt");
+                            ct.TextRead("web_consolecmdsdefault.txt");
                         else if (_config.ConfigReadWrite.Instance.CurrentConfig.Locale == "ro")
-                            ct.TextRead("ro_web_consolecmddefault.txt");
+                            ct.TextRead("web_consolecmdsdefault.txt");
                         else if (_config.ConfigReadWrite.Instance.CurrentConfig.Locale == "gr")
-                            ct.TextRead("gr_web_consolecmddefault.txt");
+                            ct.TextRead("web_consolecmdsdefault.txt");
                         else if (_config.ConfigReadWrite.Instance.CurrentConfig.Locale == "ee")
-                            ct.TextRead("ee_web_consolecmddefault.txt");
+                            ct.TextRead("web_consolecmdsdefault.txt");
                         break;
                 }
             #endregion

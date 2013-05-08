@@ -99,11 +99,11 @@
     <Compile Include="Packets\SaltAuthentication.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Packets\CharacterEntry.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryBase\CharacterList.cs" />
     <Compile Include="QueryBase\LoginFlags.cs" />
     <Compile Include="QueryBase\LoginName.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryBase\LoginPasswd.cs" />
     <Compile Include="QueryBase\LoginPlayer.cs" />
     <Compile Include="LoginServer.cs" />
@@ -172,7 +172,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>"$(SolutionDir)Helpers\RevisionGetter\bin\RevisionGetter.exe" "$(ProjectDir)\Properties\AssemblyInfo.cs"</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
