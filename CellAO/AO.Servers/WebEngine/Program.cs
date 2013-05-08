@@ -105,19 +105,19 @@ namespace WebEngine
             #region Locale
             if (_config.ConfigReadWrite.Instance.CurrentConfig.Locale == "en")
             {
-                ct.TextRead("en_web_consolecommands.txt");
+                ct.TextRead("web_consolecommands.txt");
             }
             else if (_config.ConfigReadWrite.Instance.CurrentConfig.Locale == "ro")
             {
-                ct.TextRead("ro_web_consolecommands.txt");
+                ct.TextRead("web_consolecommands.txt");
             }
             else if (_config.ConfigReadWrite.Instance.CurrentConfig.Locale == "gr")
             {
-                ct.TextRead("ro_web_consolecommands.txt");
+                ct.TextRead("web_consolecommands.txt");
             }
             else if (_config.ConfigReadWrite.Instance.CurrentConfig.Locale == "ee")
             {
-                ct.TextRead("ee_web_consolecommands.txt");
+                ct.TextRead("web_consolecommands.txt");
             }
             #endregion
             while (true)

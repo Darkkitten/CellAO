@@ -22,12 +22,21 @@ namespace WebEngine
                 {
                     Directory.CreateDirectory(WebServerPath+"\\temp");
                     WebClient wc = new WebClient();
-                  //  wc.DownloadFileCompleted += new System.ComponentModel.AsyncCompletedEventHandler(Completed);
-                   // wc.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
-                    //wc.DownloadFileAsync("http://windows.php.net/downloads/releases/php-5.3.24-nts-Win32-VC9-x86.msi", WebServerPath + "\\temp\\php-5.3.24-nts-Win32-VC9-x86.msi");
+
+                    //wc.DownloadFileCompleted += new System.ComponentModel.AsyncCompletedEventHandler(Completed);
+                    //wc.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
+                    //wc.DownloadFileAsync(new System.Uri("http://windows.php.net/downloads/releases/php-5.3.24-nts-Win32-VC9-x86.msi"), WebServerPath + "\\temp\\php-5.3.24-nts-Win32-VC9-x86.msi");
                 }
                 catch {}
             }
+        }
+        private void Completed(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            Console.WriteLine("Completed");
+        }
+        private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            Console.Write("\rDownloading: {0}", e.ProgressPercentage + "%");
         }
     }
 }

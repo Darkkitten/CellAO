@@ -15,14 +15,23 @@ namespace WebEngine
         private IPAddress Address { get; set; }
         private int Port { get; set; }
 
+        /// <summary>
+        /// Starts our Httpd server
+        /// </summary>
+        /// <param name="Host">must be in dotted ip form IE: 127.0.0.1</param>
+        /// <param name="port"></param>
         public void Start(string Host, int port)
         {
-            this.Address = IPAddress.Parse(Host);
+            IPAddress address = IPAddress.Any;
+            if (IPAddress.TryParse(Host, out address)) { this.Address = address; }
+            else // Must be a hostname
+            { this.Address = ConvertFromHostName(Host); }
+
             this.Port = port;
             try
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Server Starting...");
+                Console.WriteLine("Server Starting on Host {0}, Port {1}", Host, port);
                 Console.ResetColor();
                 
                 this.requestListener = new HttpListener();
@@ -66,11 +75,26 @@ namespace WebEngine
                 return;
             }
             // Send the context to our manager
-            //ConversationManager csm = new ConversationManager(context);
+            ConverstationManager csm = new ConverstationManager(context);
 
             // Now let the server start the next request
             this.requestListener.BeginGetContext(new AsyncCallback(this.RequestReceived), this.requestListener);
         }
-
+        /// <summary>
+        /// Attempts to convert from a hostname to a IPAddress
+        /// </summary>
+        /// <param name="hostname">the hostname</param>
+        /// <returns>hostname converted to IPAddress, or IPAddress.Any</returns>
+        public IPAddress ConvertFromHostName(string hostname)
+        {
+            IPAddress[] addresslist = Dns.GetHostAddresses(hostname);
+            IPAddress result = IPAddress.Any;
+            foreach (IPAddress theaddress in addresslist)
+            {
+                if (theaddress.ToString() == hostname)
+                    result = theaddress;
+            }
+            return result;
+        }
     }
 }
