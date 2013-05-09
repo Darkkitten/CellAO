@@ -92,7 +92,7 @@ namespace WebEngine
             {
                 ProcessStartInfo php = new ProcessStartInfo("msiexec.exe");
                 php.UseShellExecute = false;
-                php.Arguments = "/i "+msiLoc+" /qn ADDLOCAL=cgi,ext_php_mysqli INSTALLDIR=\u0022" + installDir+"\u0022";
+                php.Arguments = "/i "+msiLoc+" /qn ADDLOCAL=cgi,ext_php_mysqli INSTALLDIR=" + installDir;
                 Console.WriteLine(php.Arguments);
                 php.CreateNoWindow = true;
                 Process p = Process.Start(php);
